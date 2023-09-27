@@ -2,9 +2,14 @@ const express = require("express");
 const authRouter = express.Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const accountSid = "AC2fcd0920bd986aadccf9a3aee4f4bcd7";
-const authToken = "b9b6d27fe400b0b8ab7f667093f7b532";
-const client = require("twilio")(accountSid, authToken, { lazyLoading: true });
+require("dotenv").config();
+// const accountSid = "AC2fcd0920bd986aadccf9a3aee4f4bcd7";
+// const authToken = "b9b6d27fe400b0b8ab7f667093f7b532";
+const { TWILIO_AUTH_TOKEN, TWILIO_ACCOUNT_SID, TWILIO_SERVICE_SID } =
+  process.env;
+const client = require("twilio")(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, {
+  lazyLoading: true,
+});
 
 let OTP, user;
 authRouter.post("/signup", async (req, res) => {
@@ -33,7 +38,7 @@ authRouter.post("/signup", async (req, res) => {
     await client.messages
       .create({
         body: `Your confirmation otp code: #${OTP} send from Sixwheels`,
-        messagingServiceSid: "MG12562348e4429ace00cbd296da5de327",
+        messagingServiceSid: TWILIO_SERVICE_SID,
         to: `+966${recipientPhoneNumber}`, //9080479236
       })
       .then(() => res.status(200).json({ msg: "Message Sent" }));
@@ -80,8 +85,8 @@ authRouter.post("/signin", async (req, res) => {
     await client.messages
       .create({
         body: `Your confirmation otp code: #${OTP} send from Sixwheels`,
-        messagingServiceSid: "MG12562348e4429ace00cbd296da5de327",
-        to: `+966${recipientPhoneNumber}`, //9080479236
+        messagingServiceSid: TWILIO_SERVICE_SID,
+        to: `+91${recipientPhoneNumber}`, //9080479236
       })
       .then((message) => {
         res.status(200).json({ msg: "Message sent successfully" });
