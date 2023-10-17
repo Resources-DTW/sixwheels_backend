@@ -39,7 +39,7 @@ authRouter.post("/signup", async (req, res) => {
       .create({
         body: `Your confirmation otp code: #${OTP} send from Sixwheels`,
         messagingServiceSid: TWILIO_SERVICE_SID,
-        to: `+966${recipientPhoneNumber}`, //9080479236
+        to: `+91${recipientPhoneNumber}`, //9080479236
       })
       .then(() => res.status(200).json({ msg: "Message Sent" }));
   } catch (e) {
@@ -86,7 +86,7 @@ authRouter.post("/signin", async (req, res) => {
       .create({
         body: `Your confirmation otp code: #${OTP} send from Sixwheels`,
         messagingServiceSid: TWILIO_SERVICE_SID,
-        to: `+966${recipientPhoneNumber}`, //9080479236
+        to: `+91${recipientPhoneNumber}`, //9080479236
       })
       .then((message) => {
         res.status(200).json({ msg: "Message sent successfully" });

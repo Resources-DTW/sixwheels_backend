@@ -2,13 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
-// const router = express.Router();
-// const User = require("./models/User");
-// const UserOTPVerification = require("./models/UserOTPVerification");
-// const UserVerification = require("./models/UserVerification");
-
 const port = 3000;
-
 const app = express();
 
 dotenv.config();
@@ -19,7 +13,7 @@ mongoose
 
 //To allow localhost network
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
