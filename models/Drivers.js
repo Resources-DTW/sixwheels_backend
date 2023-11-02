@@ -1,22 +1,25 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema(
+const DriverSchema = new Schema(
   {
     firstName: String,
     lastName: String,
+    dateOfBirth: String,
     mobileNumber: String,
     email: String,
+    license: String,
+    serviceProvider: String,
     password: String,
-    verified: {
+    policyAccepted: {
       type: Boolean,
       default: false,
+      
     },
     number: String,
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("User", UserSchema);
-
-module.exports = User;
+const Drivers = mongoose.model("Drivers", DriverSchema);
+module.exports = Drivers;

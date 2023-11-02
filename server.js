@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
+const driverRouter = require("./routes/driver");
+const providerRouter = require("./routes/provider");
 const port = 3000;
 const app = express();
 
@@ -25,6 +27,8 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 app.use("/api/", authRouter);
+app.use("/drivers/", driverRouter);
+app.use("/provider", providerRouter);
 
 app.listen(process.env.PORT || port, () =>
   console.log(`Sixwheels backend listening on port ${process.env.PORT}!`)
