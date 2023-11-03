@@ -12,6 +12,7 @@ module.exports = {
         mobileNumber: req.body.mobileNumber,
         email: req.body.email,
         license: req.body.license,
+        experience: req.body.experience,
         serviceProvider: req.body.serviceProvider,
         password: CryptoJS.AES.encrypt(
           req.body.password,

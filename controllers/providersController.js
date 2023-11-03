@@ -22,7 +22,10 @@ module.exports = {
       const savedProvider = await newProvider.save();
       res
         .status(201)
-        .json({ message: "Service Provider Successfully Created" });
+        .json({
+          message: "Service Provider Successfully Created",
+          savedProvider,
+        });
     } catch (error) {
       console.error(error); // Log the error for debugging.
       res

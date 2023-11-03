@@ -9,12 +9,12 @@ const DriverSchema = new Schema(
     mobileNumber: String,
     email: String,
     license: String,
+    experience: String,
     serviceProvider: String,
     password: String,
     policyAccepted: {
       type: Boolean,
       default: false,
-      
     },
     number: String,
   },
