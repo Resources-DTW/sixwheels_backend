@@ -5,6 +5,7 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const driverController = require("../controllers/driverController");
 const providersController = require("../controllers/providersController");
+const subAdminController = require("../controllers/subAdminController");
 require("dotenv").config();
 // const accountSid = "AC2fcd0920bd986aadccf9a3aee4f4bcd7";
 // const authToken = "b9b6d27fe400b0b8ab7f667093f7b532";
@@ -21,6 +22,9 @@ authRouter.post("/login", driverController.loginUser);
 //Provider Auth
 authRouter.post("/registerprovider", providersController.createProvider);
 authRouter.post("/loginprovider", providersController.loginProvider);
+
+authRouter.post("/registeradmin", subAdminController.createAdmin);
+authRouter.post("/loginadmin", subAdminController.loginAdmin);
 
 //Customer Auth
 authRouter.post("/registeruser", async (req, res) => {

@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const Drivers = require("../models/Drivers");
-const { verifyTokenAndAdmin } = require("./verifyToken");
+const SubAdmin = require("../models/SubAdmin");
 
 //UPDATE
 router.put("/:id", async (req, res) => {
@@ -11,7 +10,7 @@ router.put("/:id", async (req, res) => {
     ).toString();
   }
   try {
-    const updatedUser = await Drivers.findByIdAndUpdate(
+    const updatedUser = await SubAdmin.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
@@ -27,8 +26,8 @@ router.put("/:id", async (req, res) => {
 //DELETE
 router.delete("/:id", async (req, res) => {
   try {
-    await Drivers.findByIdAndDelete(req.params.id);
-    res.status(200).json("User has been deleted...");
+    await SubAdmin.findByIdAndDelete(req.params.id);
+    res.status(200).json("Sub admin has been deleted...");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -37,7 +36,7 @@ router.delete("/:id", async (req, res) => {
 //GET DRIVER
 router.get("/find/:id", async (req, res) => {
   try {
-    const user = await Drivers.findById(req.params.id);
+    const user = await SubAdmin.findById(req.params.id);
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (error) {
@@ -50,38 +49,38 @@ router.get("/", async (req, res) => {
   const query = req.query.new;
   try {
     const users = query
-      ? await Drivers.find().sort({ _id: -1 }).limit(5)
-      : await Drivers.find();
+      ? await SubAdmin.find().sort({ _id: -1 }).limit(5)
+      : await SubAdmin.find();
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-//GET DRIVER STATS
-router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
-  const date = new Date();
-  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+// GET DRIVER STATS
+// router.get("/stats", async (req, res) => {
+//   const date = new Date();
+//   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 
-  try {
-    const data = await Drivers.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: 1 },
-        },
-      },
-    ]);
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
+//   try {
+//     const data = await Drivers.aggregate([
+//       { $match: { createdAt: { $gte: lastYear } } },
+//       {
+//         $project: {
+//           month: { $month: "$createdAt" },
+//         },
+//       },
+//       {
+//         $group: {
+//           _id: "$month",
+//           total: { $sum: 1 },
+//         },
+//       },
+//     ]);
+//     res.status(200).json(data);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
 
 module.exports = router;

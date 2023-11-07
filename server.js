@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
 const driverRouter = require("./routes/driver");
 const providerRouter = require("./routes/provider");
+const subAdminRouter = require("./routes/subAdmin");
+const promotionsRouter = require("./routes/promotions");
 const port = 3000;
 const app = express();
 
@@ -28,7 +30,9 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 app.use("/api/", authRouter);
 app.use("/drivers/", driverRouter);
-app.use("/provider", providerRouter);
+app.use("/provider/", providerRouter);
+app.use("/subadmin/", subAdminRouter);
+app.use("/promotions/", promotionsRouter);
 
 app.listen(process.env.PORT || port, () =>
   console.log(`Sixwheels backend listening on port ${process.env.PORT}!`)
