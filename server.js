@@ -8,6 +8,9 @@ const subAdminRouter = require("./routes/subAdmin");
 const promotionsRouter = require("./routes/promotions");
 const port = 3000;
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 
 dotenv.config();
 mongoose

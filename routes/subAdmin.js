@@ -33,7 +33,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//GET DRIVER
+//GET SUB ADMIN
 router.get("/find/:id", async (req, res) => {
   try {
     const user = await SubAdmin.findById(req.params.id);
@@ -44,7 +44,7 @@ router.get("/find/:id", async (req, res) => {
   }
 });
 
-//GET ALL DRIVER
+//GET ALL SUB ADMIN
 router.get("/", async (req, res) => {
   const query = req.query.new;
   try {
