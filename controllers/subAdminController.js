@@ -29,7 +29,7 @@ module.exports = {
 
   loginAdmin: async (req, res) => {
     try {
-      const user = await SubAdmin.findOne({ username: req.body.userName });
+      const user = await SubAdmin.findOne({ username: req.body.username });
       if (!user) {
         return res.status(401).json("Your username is incorrect");
       }
